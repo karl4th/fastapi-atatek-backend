@@ -50,5 +50,8 @@ class User(Base):
     created_tickets = relationship("Ticket", back_populates="created_by_user", foreign_keys="Ticket.created_by")
     answered_tickets = relationship("Ticket", back_populates="answered_by_user", foreign_keys="Ticket.answered_by")
 
+    created_tree = relationship("Tree", back_populates="created_by_user", foreign_keys="Tree.created_by")
+    updated_tree = relationship("Tree", back_populates="updated_by_user", foreign_keys="Tree.updated_by")
+
     page_moderations = relationship("PageModerator", back_populates="user")
     subscriptions = relationship("UserSubscription", back_populates="user", cascade="all, delete-orphan")

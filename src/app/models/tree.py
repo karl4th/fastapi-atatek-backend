@@ -19,8 +19,8 @@ class Tree(Base):
     mini_icon: Mapped[str] = mapped_column(nullable=True)
     main_icon: Mapped[str] = mapped_column(nullable=True)
 
-    created_by: Mapped[int] = mapped_column(nullable=True, default=1)
-    updated_by: Mapped[int] = mapped_column(nullable=True)
+    created_by: Mapped[int] = mapped_column(ForeignKey("users.id"), nullable=True, default=1)
+    updated_by: Mapped[int] = mapped_column(ForeignKey("users.id"), nullable=True)
 
     created_at: Mapped[datetime] = mapped_column(nullable=True, server_default=func.now())
     updated_at: Mapped[datetime] = mapped_column(nullable=True, server_default=func.now(), server_onupdate=func.now())
@@ -30,6 +30,9 @@ class Tree(Base):
 
     # вот тут добавили ForeignKey
     parent_id: Mapped[int | None] = mapped_column(Integer, ForeignKey("tree.id"), nullable=True)
+
+    created_by_user = relationship("User", foreign_keys=[created_by], back_populates="created_tree")
+    updated_by_user = relationship("User", foreign_keys=[updated_by], back_populates="updated_tree")
 
     # relationships
     pages = relationship("Page", back_populates="tree")

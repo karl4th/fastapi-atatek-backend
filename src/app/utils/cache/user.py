@@ -32,6 +32,11 @@ class UserCache:
 
         return {"status": False, "details": "not found"}
 
+    async def get_user_role(self, user_id: int) -> int:
+        user = await self.get_user_cache(user_id)
+        role = user['role']['id']
+        return role
+
     async def set_user_data_on_cache(self, user_id: int, meta: Dict[str, Any]):
         """
         Сохраняем данные пользователя в кэш

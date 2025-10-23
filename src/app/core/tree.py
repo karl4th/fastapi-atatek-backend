@@ -52,7 +52,7 @@ class TreeService:
                     parent_id=parent_id,
                     is_deleted=False,
                     t_id=t_id,
-                    created_by=1,
+                    created_by=7,
                 )
 
                 self.db.add(new_node)

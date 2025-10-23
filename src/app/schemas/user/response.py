@@ -22,6 +22,7 @@ class UserBase(BaseModel):
 
     class Config:
         from_attributes=True
+        
 
 
 class UserFull(UserBase):

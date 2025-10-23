@@ -5,7 +5,7 @@ from typing import Optional
 class UpdateUser(BaseModel):
     first_name: Optional[str] = Field(..., example="Бағжан")
     last_name: Optional[str] = Field(..., example="Карл")
-    middle_name: Optional[str] = Field(..., example="Саматұлы")
+    middle_name: Optional[str] = None
 
     address_id: Optional[int] = None
     page_id: Optional[int] = None

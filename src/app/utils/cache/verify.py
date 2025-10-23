@@ -16,7 +16,7 @@ class VerfiyCache():
         if raw := await r.get(key):
             return json.loads(raw)
 
-        return {"status": False, "details": "not found"}
+        return {"details": "not found"}
 
 
     async def set_user_code(self, user_id: int, meta: Dict[str, Any],):

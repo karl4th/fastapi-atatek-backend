@@ -9,6 +9,7 @@ from sqlalchemy import or_, select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from src.app.models import Address, User
+from src.app.utils.cache import UserCache
 
 
 class AddressService:
@@ -20,6 +21,7 @@ class AddressService:
         self.headers = {
             'User-Agent': 'Atatek Family Tree/1.0'
         }
+        self.cache = UserCache()
 
     async def search_locations(self, query: str) -> List[Dict]:
         """
@@ -289,6 +291,7 @@ class AddressService:
         user.address_id = address_id
         await self.db.commit()
         await self.db.refresh(user)
+        await self.cache.invalidate(user_id)
         return {
             "detail": "Қолданушының мекен жайы сәтті ауыстырылды"
         }

@@ -52,7 +52,7 @@ class AuthService():
 
     async def _get_verify_code(self, user_id: int):
         code = await self.cache.get_user_code(user_id)
-        if code["status"] != False:
+        if code.get('code'):
             code = int(code['code'])
             return code
         else: 

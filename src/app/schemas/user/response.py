@@ -4,6 +4,7 @@ from datetime import datetime
 
 from src.app.schemas.system import RoleBase, AddressBase
 from src.app.schemas.page import PageBase
+from src.app.schemas.business import Tariff
 
 class UserBase(BaseModel):
     id: int
@@ -27,6 +28,7 @@ class UserFull(UserBase):
     role: RoleBase
     address: Optional[AddressBase]
     page: Optional[PageBase]
+    tariff: Optional[Tariff] = None
 
     class Config:
         from_attributes=True

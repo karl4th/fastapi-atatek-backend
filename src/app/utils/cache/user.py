@@ -4,7 +4,7 @@ from typing import Any, Dict
 from .redis import get_redis
 
 from sqlalchemy import select
-from src.app.models import User
+from src.app.models import User, UserSubscription
 from src.app.db import async_session_factory
 from sqlalchemy.orm import selectinload
 from src.app.schemas.user import UserFull
@@ -62,9 +62,18 @@ class UserCache:
                     selectinload(User.role),
                     selectinload(User.address),
                     selectinload(User.page),
+                    selectinload(User.subscriptions).selectinload(UserSubscription.tariff)
                 )
             )
             user = (await session.execute(stmt)).scalar_one_or_none()
             if not user:
                 return None
-            return UserFull.model_validate(user, from_attributes=True)
+            active_sub = next((s for s in user.subscriptions if s.is_active), None)
+            tariff = active_sub.tariff if active_sub else None
+
+            # Создаём Pydantic модель с безопасной вставкой
+            return UserFull.model_validate(
+                {**user.__dict__, "tariff": tariff},
+                from_attributes=True
+            )
+

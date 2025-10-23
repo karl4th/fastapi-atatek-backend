@@ -7,7 +7,7 @@ from sqlalchemy.orm import selectinload
 from typing import List
 from src.app.utils import VerfiyCache, AuthUtils, UserCache
 
-from src.app.models import User
+from src.app.models import User, UserSubscription
 from src.app.schemas.user import CreateUser, UserResponse, UserBase, LoginUser, UserFull
 
 class AuthService():

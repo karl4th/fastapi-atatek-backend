@@ -55,7 +55,7 @@ async def login_user(payload: LoginUser, response: Response, db: AsyncSession = 
 
 @router.get('/me')
 @standar_atatek
-async def login(user_data = Depends(auth.get_user_data_dependency()), db: AsyncSession = Depends(get_db)):
+async def get_me(user_data = Depends(auth.get_user_data_dependency()), db: AsyncSession = Depends(get_db)):
     service = AuthService(db)
     user_id = int(user_data['sub'])
     return await service.get_me(user_id)

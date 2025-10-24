@@ -33,7 +33,7 @@ class TreeService:
                     headers=self.headers
                 )
                 response.raise_for_status()
-            await asyncio.sleep(1)
+            await asyncio.sleep(0.1)
             data = response.json()
 
             new_nodes = []
@@ -52,7 +52,7 @@ class TreeService:
                     parent_id=parent_id,
                     is_deleted=False,
                     t_id=t_id,
-                    created_by=7,
+                    created_by=1,
                 )
 
                 self.db.add(new_node)

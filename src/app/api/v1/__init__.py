@@ -4,11 +4,13 @@ from .address import router as address_router
 from .tree import router as tree_router
 from .ticket import router as ticket_router
 from .profile import router as profile_router
+from .pages import router as pages_router
 
 def include_routers(app):
     app.include_router(auth_router)
     app.include_router(address_router)
     app.include_router(profile_router)
+    app.include_router(pages_router)
     app.include_router(tree_router)
     app.include_router(ticket_router)
 

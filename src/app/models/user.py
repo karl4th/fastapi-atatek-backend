@@ -28,8 +28,8 @@ class User(Base):
     middle_name: Mapped[str] = mapped_column(String(50), nullable=True)
 
     role_id: Mapped[int] = mapped_column(ForeignKey("roles.id"), default=1)
-    address_id: Mapped[int] = mapped_column(ForeignKey("address.id"), nullable=True)
-    page_id: Mapped[int] = mapped_column(ForeignKey("pages.id"), nullable=True)
+    address_id: Mapped[int] = mapped_column(ForeignKey("address.id", ondelete="SET NULL"), nullable=True)
+    page_id: Mapped[int] = mapped_column(ForeignKey("pages.id", ondelete="SET NULL"), nullable=True)
 
     phone: Mapped[str] = mapped_column(String(12), nullable=False, unique=True)
     password: Mapped[str] = mapped_column(String(255), nullable=False)

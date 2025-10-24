@@ -1,6 +1,6 @@
 services:
-  db: 
-    image: postgres
+  db:
+    image: postgres:18
     container_name: atatek_db
     environment:
       POSTGRES_USER: "postgres"
@@ -10,10 +10,11 @@ services:
       - "5432:5432"
     networks:
       - atatek_line
+    # 👇 Новый рекомендуемый путь маунта
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - postgres_data:/var/lib/postgresql
 
-  adminer: 
+  adminer:
     image: adminer
     container_name: adminer
     ports:
